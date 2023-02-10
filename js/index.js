@@ -1,29 +1,95 @@
+/**Функция вывода ошибок вычисления в методах
+ * @param {string} functionName
+ * @param {string} messageFromFunction
+ */
+function viewingFunctionErrors (functionName, messageFromFunction) { 
+    console.log(`execution errors of ${functionName}  method because: ${messageFromFunction}`)
+}
 
+/**Функция проверки переданных в функцию значений аргументов 
+ * @param {Array} argumentValues
+ * @param {Array} ErrorMessages
+ * 
+ * @returns {string}
+ */
+function checkingReceivedArgumentValues (argumentValues, ErrorMessages) {
+    let errorMessage = null;
+    for ( let i = 0;  i < argumentValues.length;  i++ ) {
+        (typeof(argumentValues [ i ]) !== 'number') ? errorMessage = `The value '${argumentValues [ i ]}' was entered as the '${ ( i+1 + "'" ).padEnd ( 2 ) } argument, and therefore: ${ErrorMessages[i]}` : null;
+        //console.log ( `The value ${argumentValues [ i ]} was entered as the '${ ( i + "'" ).padEnd ( 2 ) } argument, and therefore: ${ErrorMessages[i]}` )
+    }
+    errorMessage == null ? errorMessage = `${ErrorMessages[ErrorMessages.length-1]}` : null
+    return errorMessage
+}
+
+/**Функция округления до сотых долей
+ * @param {number} argument
+ *
+ * @returns {number}
+ */
 function roundingFunctionToHundredths (argument) {
-    const argumentRoundedToHundredths = Math.round (argument * 100) / 100;
-    return argumentRoundedToHundredths
+    let arrayOfErrorMessages = ["argument is incorrect", "Something went wrong and the rounding function to hundredth was calculated incorrectly"];
+    let errorMessage = checkingReceivedArgumentValues (arguments, arrayOfErrorMessages);
+    try {
+        const argumentRoundedToHundredths = Math.round (argument * 100) / 100;
+        return argumentRoundedToHundredths;
+    } catch (error) {viewingFunctionErrors(roundingFunctionToHundredths.name, errorMessage)};
 }
 
+/**Функция вычисления энергетического потенциала
+ * @param {number} apparatusVolume
+ * @param {number} apparatusBurstPressure
+ * @param {number} atmospherePressure
+ * @param {number} adiabaticIndex
+ *
+ * @returns {number}
+ */
 function energyPotentialCalculation (apparatusVolume, apparatusBurstPressure, atmospherePressure, adiabaticIndex){
-    const energyPotential = apparatusVolume * (apparatusBurstPressure - atmospherePressure)/(adiabaticIndex - 1);
-    return energyPotential
+    let arrayOfErrorMessages = ["apparatusVolume is incorrect", "apparatusBurstPressure is incorrect", "atmospherePressure is incorrect", "adiabaticIndex is incorrect", "Something went wrong and the rounding function to hundredth was calculated incorrectly"];
+    let errorMessage = checkingReceivedArgumentValues (arguments, arrayOfErrorMessages);
+    try {
+        const energyPotential = apparatusVolume * (apparatusBurstPressure - atmospherePressure)/(adiabaticIndex - 1);
+        return energyPotential;
+    } catch (error) {viewingFunctionErrors(energyPotentialCalculation.name, errorMessage)};
+
 }
 
+/**Функция вычисления тротилового эквивалента
+ * @param {number} energyPotential
+ * 
+ * @returns {number} tntEquivalentExplosive
+ */
 function tntEquivalentExplosiveCalculation (energyPotential) {
     let tntEquivalentExplosive = 0.4 * energyPotential * Math.pow (10, 3) / 0.9 / 4200; 
     return tntEquivalentExplosive
 }
 
+/**Функция вычисления общего количества горючих газов приведено к расчету удельной энергии сгорания
+ * @param {number} energyPotential
+ * 
+ * @returns {number} 
+ */
 function totalCombustibleGasesReducedToSpecificCombustionEnergyCalculation (energyPotential) {
     let totalCombustibleGasesReducedToSpecificCombustionEnergy = energyPotential / 4.6 / Math.pow (10, 4)
     return totalCombustibleGasesReducedToSpecificCombustionEnergy
 }
 
+/**Функция вычисления относительного энергетического потенциала взрывоопасности
+ * @param {number} totalCombustibleGasesReducedToSpecificCombustionEnergy
+ * 
+ * @returns {number} 
+ */
 function relativeEnergyPotentialOfExplosivenessCalculation (totalCombustibleGasesReducedToSpecificCombustionEnergy) {
     let relativeEnergyPotentialOfExplosiveness = 1/16.534 * Math.pow (totalCombustibleGasesReducedToSpecificCombustionEnergy, 1/3);
     return relativeEnergyPotentialOfExplosiveness
 }
 
+/**Функция определения категории взрывоопасности 
+ * @param {number} relativeEnergyPotentialOfExplosiveness
+ * @param {number} totalCombustibleGasesReducedToSpecificCombustionEnergy
+ * 
+ * @returns {string} 
+ */
 function blockExplosionCategoryCalculation (relativeEnergyPotentialOfExplosiveness, totalCombustibleGasesReducedToSpecificCombustionEnergy) {
     let blockExplosionCategory = "III" ;
     if ( 27 <= relativeEnergyPotentialOfExplosiveness && 2000 <= totalCombustibleGasesReducedToSpecificCombustionEnergy < 5000){blockExplosionCategory = "II"};
@@ -31,16 +97,35 @@ function blockExplosionCategoryCalculation (relativeEnergyPotentialOfExplosivene
     return blockExplosionCategory
 }
 
+/**Функция вычисления первой переменной 
+ * @param {number} radius
+ * @param {number} energyPotential
+ * @param {number} atmospherePressure
+ * 
+ * @returns {number} 
+ */
 function calculationOneFunction (radius, energyPotential, atmospherePressure){
     const oneValue = radius/(Math.pow(energyPotential/atmospherePressure,(1/3)));
     return oneValue
 }
 
+/**Функция вычисления радиуса 
+ * @param {number} oneValue
+ * 
+ * @returns {number} 
+ */
 function calculationTwoFunction (oneValue){
     const pressureDrop = Math.pow(Math.E, -1.124-1.66*Math.log(oneValue)+0.26*Math.pow(Math.log(oneValue),2));
     return pressureDrop
 }
-    
+
+/**Функция подбора радиуса зоны поражения с фронтом заданного давления, энергетическом потенциале и заданном атмосферном давлении
+ * @param {number} pressureDrop
+ * @param {number} energyPotential
+ * @param {number} atmospherePressure
+ * 
+ * @returns {number} 
+ */
 function calculationOfTheRadiusOfTheShockWaveZone (pressureDrop, energyPotential, atmospherePressure){
     let zoneRadius = 0.5;
     let x1 = calculationOneFunction(zoneRadius, energyPotential, atmospherePressure);
@@ -54,6 +139,12 @@ function calculationOfTheRadiusOfTheShockWaveZone (pressureDrop, energyPotential
     return zoneRadius
 }
 
+/**Функция подбора радиуса зоны поражения с фронтом заданного давления, энергетическом потенциале и заданном атмосферном давлении
+ * @param {Object} resultsObject
+ * @param {id} elementIntoWhichToInsert
+ * @param {Array} arreyWidths
+ * 
+ */
 function displayingTheResultOfTheCalculationToHtml (resultsObject, elementIntoWhichToInsert, arreyWidths) {
     let keysOfTheResultingObject = Object.keys(resultsObject);
     let calculationResults = document.createElement("table");
@@ -159,6 +250,6 @@ calc.onclick = function () {
             window.location.href = uri + base64(format(template, ctx))
         }
     })()    
-
-    console.log (calculationDate, resultParameters);
+    //console.log (calculationDate, resultParameters);
+    //return calculationDate, resultParameters
 }

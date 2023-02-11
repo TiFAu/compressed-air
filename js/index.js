@@ -193,6 +193,9 @@ function displayingTheResultOfTheCalculationToHtml (resultsObject, elementIntoWh
 let arrayOfTableColumnWidths = ["5%", "65%", "10%", "10%", "10%"]; //массив значений ширин столбцов таблиц
 
 calc.onclick = function () {
+    results.innerHTML = "" //чистим таблицу с расчетом;
+    //tableResults.style.display = 'table';
+    //tableResults.innerHTML = "" //чистим таблицу с расчетом;
     let calculationDate = {
         initialCalculationData: {
             apparatusVolume: +apparatusVolume.value,
@@ -207,6 +210,11 @@ calc.onclick = function () {
             relativeEnergyPotentialOfExplosiveness: null,
             blockExplosionCategory: null,
             calculatedRadiiOfShockWaveZones: []
+        },
+        timeParameters: {
+            dateOfCalculation : `${new Date ().getFullYear()}-${new Date ().getMonth()}-${new Date ().getDate()}`,
+            startTime: new Date (),
+            finishTime: null
         }
     }
     //calculation main parameters 
@@ -249,7 +257,9 @@ calc.onclick = function () {
             const ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
             window.location.href = uri + base64(format(template, ctx))
         }
-    })()    
+    })();
+
+    calculationDate.timeParameters.finishTime = new Date (); // запись времени завершения рассчета
     //console.log (calculationDate, resultParameters);
     //return calculationDate, resultParameters
 }

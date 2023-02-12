@@ -60,8 +60,12 @@ function energyPotentialCalculation (apparatusVolume, apparatusBurstPressure, at
  * @returns {number} tntEquivalentExplosive
  */
 function tntEquivalentExplosiveCalculation (energyPotential) {
-    let tntEquivalentExplosive = 0.4 * energyPotential * Math.pow (10, 3) / 0.9 / 4200; 
-    return tntEquivalentExplosive
+    let arrayOfErrorMessages = ["energyPotential is incorrect", "Something went wrong and the rounding function to hundredth was calculated incorrectly"];
+    let errorMessage = checkingReceivedArgumentValues (arguments, arrayOfErrorMessages);
+    try {
+        let tntEquivalentExplosive = 0.4 * energyPotential * Math.pow (10, 3) / 0.9 / 4200; 
+        return tntEquivalentExplosive
+    } catch (error) {viewingFunctionErrors(tntEquivalentExplosiveCalculation.name, errorMessage)};
 }
 
 /**Функция вычисления общего количества горючих газов приведено к расчету удельной энергии сгорания
@@ -70,8 +74,12 @@ function tntEquivalentExplosiveCalculation (energyPotential) {
  * @returns {number} 
  */
 function totalCombustibleGasesReducedToSpecificCombustionEnergyCalculation (energyPotential) {
-    let totalCombustibleGasesReducedToSpecificCombustionEnergy = energyPotential / 4.6 / Math.pow (10, 4)
-    return totalCombustibleGasesReducedToSpecificCombustionEnergy
+    let arrayOfErrorMessages = ["energyPotential is incorrect", "Something went wrong and the rounding function to hundredth was calculated incorrectly"];
+    let errorMessage = checkingReceivedArgumentValues (arguments, arrayOfErrorMessages);
+    try {
+        let totalCombustibleGasesReducedToSpecificCombustionEnergy = energyPotential / 4.6 / Math.pow (10, 4)
+        return totalCombustibleGasesReducedToSpecificCombustionEnergy
+    } catch (error) {viewingFunctionErrors(totalCombustibleGasesReducedToSpecificCombustionEnergyCalculation.name, errorMessage)};
 }
 
 /**Функция вычисления относительного энергетического потенциала взрывоопасности
@@ -80,8 +88,12 @@ function totalCombustibleGasesReducedToSpecificCombustionEnergyCalculation (ener
  * @returns {number} 
  */
 function relativeEnergyPotentialOfExplosivenessCalculation (totalCombustibleGasesReducedToSpecificCombustionEnergy) {
-    let relativeEnergyPotentialOfExplosiveness = 1/16.534 * Math.pow (totalCombustibleGasesReducedToSpecificCombustionEnergy, 1/3);
-    return relativeEnergyPotentialOfExplosiveness
+    let arrayOfErrorMessages = ["totalCombustibleGasesReducedToSpecificCombustionEnergy is incorrect", "Something went wrong and the rounding function to hundredth was calculated incorrectly"];
+    let errorMessage = checkingReceivedArgumentValues (arguments, arrayOfErrorMessages);
+    try {
+        let relativeEnergyPotentialOfExplosiveness = 1/16.534 * Math.pow (totalCombustibleGasesReducedToSpecificCombustionEnergy, 1/3);
+        return relativeEnergyPotentialOfExplosiveness
+    } catch (error) {viewingFunctionErrors(relativeEnergyPotentialOfExplosivenessCalculation.name, errorMessage)};
 }
 
 /**Функция определения категории взрывоопасности 
@@ -91,10 +103,14 @@ function relativeEnergyPotentialOfExplosivenessCalculation (totalCombustibleGase
  * @returns {string} 
  */
 function blockExplosionCategoryCalculation (relativeEnergyPotentialOfExplosiveness, totalCombustibleGasesReducedToSpecificCombustionEnergy) {
-    let blockExplosionCategory = "III" ;
-    if ( 27 <= relativeEnergyPotentialOfExplosiveness && 2000 <= totalCombustibleGasesReducedToSpecificCombustionEnergy < 5000){blockExplosionCategory = "II"};
-    if ( 37 >= relativeEnergyPotentialOfExplosiveness && totalCombustibleGasesReducedToSpecificCombustionEnergy >= 5000){blockExplosionCategory = "I"};
-    return blockExplosionCategory
+    let arrayOfErrorMessages = ["relativeEnergyPotentialOfExplosiveness is incorrect", "totalCombustibleGasesReducedToSpecificCombustionEnergy is incorrect", "Something went wrong and the rounding function to hundredth was calculated incorrectly"];
+    let errorMessage = checkingReceivedArgumentValues (arguments, arrayOfErrorMessages);
+    try {
+        let blockExplosionCategory = "III" ;
+        if ( 27 <= relativeEnergyPotentialOfExplosiveness && 2000 <= totalCombustibleGasesReducedToSpecificCombustionEnergy < 5000){blockExplosionCategory = "II"};
+        if ( 37 >= relativeEnergyPotentialOfExplosiveness && totalCombustibleGasesReducedToSpecificCombustionEnergy >= 5000){blockExplosionCategory = "I"};
+        return blockExplosionCategory
+    } catch (error) {viewingFunctionErrors(blockExplosionCategoryCalculation.name, errorMessage)};
 }
 
 /**Функция вычисления первой переменной 
@@ -105,18 +121,26 @@ function blockExplosionCategoryCalculation (relativeEnergyPotentialOfExplosivene
  * @returns {number} 
  */
 function calculationOneFunction (radius, energyPotential, atmospherePressure){
-    const oneValue = radius/(Math.pow(energyPotential/atmospherePressure,(1/3)));
-    return oneValue
+    let arrayOfErrorMessages = ["radius is incorrect", "energyPotential is incorrect", "atmospherePressure is incorrect", "Something went wrong and the rounding function to hundredth was calculated incorrectly"];
+    let errorMessage = checkingReceivedArgumentValues (arguments, arrayOfErrorMessages);
+    try {
+        const oneValue = radius/(Math.pow(energyPotential/atmospherePressure,(1/3)));
+        return oneValue
+    } catch (error) {viewingFunctionErrors(calculationOneFunction.name, errorMessage)};
 }
 
-/**Функция вычисления радиуса 
+/**Функция вычисления перепада давления 
  * @param {number} oneValue
  * 
  * @returns {number} 
  */
 function calculationTwoFunction (oneValue){
-    const pressureDrop = Math.pow(Math.E, -1.124-1.66*Math.log(oneValue)+0.26*Math.pow(Math.log(oneValue),2));
-    return pressureDrop
+    let arrayOfErrorMessages = ["oneValue is incorrect", "Something went wrong and the rounding function to hundredth was calculated incorrectly"];
+    let errorMessage = checkingReceivedArgumentValues (arguments, arrayOfErrorMessages);
+    try {
+        const pressureDrop = Math.pow(Math.E, -1.124-1.66*Math.log(oneValue)+0.26*Math.pow(Math.log(oneValue),2));
+        return pressureDrop
+    } catch (error) {viewingFunctionErrors(calculationTwoFunction.name, errorMessage)};
 }
 
 /**Функция подбора радиуса зоны поражения с фронтом заданного давления, энергетическом потенциале и заданном атмосферном давлении
@@ -127,16 +151,20 @@ function calculationTwoFunction (oneValue){
  * @returns {number} 
  */
 function calculationOfTheRadiusOfTheShockWaveZone (pressureDrop, energyPotential, atmospherePressure){
-    let zoneRadius = 0.5;
-    let x1 = calculationOneFunction(zoneRadius, energyPotential, atmospherePressure);
-    let dropPressure = calculationTwoFunction (x1) * Math.pow (10,2);
-    while (pressureDrop <= dropPressure && zoneRadius < 105){
-        zoneRadius += 0.01;
-        x1 = calculationOneFunction(zoneRadius, energyPotential, atmospherePressure);
-        dropPressure = calculationTwoFunction (x1)* Math.pow (10,2);
-    }
-    //console.log ( `Радиус = ${zoneRadius}, х1 = ${x1}; dropPressure = ${dropPressure} заданное давление = ${pressureDrop}` )
-    return zoneRadius
+    let arrayOfErrorMessages = ["pressureDrop is incorrect", "energyPotential is incorrect", "atmospherePressure is incorrect", "Something went wrong and the rounding function to hundredth was calculated incorrectly"];
+    let errorMessage = checkingReceivedArgumentValues (arguments, arrayOfErrorMessages);
+    try {
+        let zoneRadius = 0.5;
+        let x1 = calculationOneFunction(zoneRadius, energyPotential, atmospherePressure);
+        let dropPressure = calculationTwoFunction (x1) * Math.pow (10,2);
+        while (pressureDrop <= dropPressure && zoneRadius < 105){
+            zoneRadius += 0.01;
+            x1 = calculationOneFunction(zoneRadius, energyPotential, atmospherePressure);
+            dropPressure = calculationTwoFunction (x1)* Math.pow (10,2);
+        }
+        //console.log ( `Радиус = ${zoneRadius}, х1 = ${x1}; dropPressure = ${dropPressure} заданное давление = ${pressureDrop}` )
+        return zoneRadius
+    } catch (error) {viewingFunctionErrors(calculationOfTheRadiusOfTheShockWaveZone.name, errorMessage)};
 }
 
 /**Функция подбора радиуса зоны поражения с фронтом заданного давления, энергетическом потенциале и заданном атмосферном давлении
@@ -146,56 +174,58 @@ function calculationOfTheRadiusOfTheShockWaveZone (pressureDrop, energyPotential
  * 
  */
 function displayingTheResultOfTheCalculationToHtml (resultsObject, elementIntoWhichToInsert, arreyWidths) {
-    let keysOfTheResultingObject = Object.keys(resultsObject);
-    let calculationResults = document.createElement("table");
-    let tableHeader = document.createElement("caption");
-    tableHeader.innerHTML = "2. Calculation results | Результати розрахунку";
-    calculationResults.appendChild(tableHeader);
-    for (y=0; y < (keysOfTheResultingObject.length); y++){
-        if (y>0){
-            var tr = document.createElement("tr");
-            let td = document.createElement("td");
-            td.innerHTML = `2.${keysOfTheResultingObject[y]}.`;
-            td.onmousemove = function(){
-                td.parentElement.style.backgroundColor = "blue";
+    let arrayOfErrorMessages = ["resultsObject is incorrect", "elementIntoWhichToInsert is incorrect", "arreyWidths is incorrect", "Something went wrong and the rounding function to hundredth was calculated incorrectly"];
+    let errorMessage = checkingReceivedArgumentValues (arguments, arrayOfErrorMessages);
+    try {
+        let keysOfTheResultingObject = Object.keys(resultsObject);
+        let calculationResults = document.createElement("table");
+        let tableHeader = document.createElement("caption");
+        tableHeader.innerHTML = "2. Calculation results | Результати розрахунку";
+        calculationResults.appendChild(tableHeader);
+        for (y=0; y < (keysOfTheResultingObject.length); y++){
+            if (y>0){
+                var tr = document.createElement("tr");
+                let td = document.createElement("td");
+                td.innerHTML = `2.${keysOfTheResultingObject[y]}.`;
+                td.onmousemove = function(){
+                    td.parentElement.style.backgroundColor = "blue";
+                }
+                tr.appendChild(td);
+                for (i=0; i < resultsObject[y].length;i++){
+                    if (resultsObject[y][i] !== undefined) {
+                        let td = document.createElement("td");
+                        td.innerHTML = resultsObject[y][i];
+                        if (i==0){td.style.textAlign= "left"};
+                        tr.appendChild(td)
+                        }
+                    else {break};
+                };
             }
-            tr.appendChild(td);
-            for (i=0; i < resultsObject[y].length;i++){
-                if (resultsObject[y][i] !== undefined) {
-                    let td = document.createElement("td");
-                    td.innerHTML = resultsObject[y][i];
-                    if (i==0){td.style.textAlign= "left"};
-                    tr.appendChild(td)
-                    }
-                else {break};
-            };
-        }
-        else{
-            var tr = document.createElement("tr");
-            let th = document.createElement("th");
-            th.innerHTML = "№ п./п.";
-            th.style.width = arreyWidths[y];
-            tr.appendChild(th);
-            for (i=0;i < resultsObject[y].length;i++){
+            else{
+                var tr = document.createElement("tr");
                 let th = document.createElement("th");
-                th.innerHTML = resultsObject[y][i];
-                th.style.width = arreyWidths[i+1];
-                tr.appendChild(th)
+                th.innerHTML = "№ п./п.";
+                th.style.width = arreyWidths[y];
+                tr.appendChild(th);
+                for (i=0;i < resultsObject[y].length;i++){
+                    let th = document.createElement("th");
+                    th.innerHTML = resultsObject[y][i];
+                    th.style.width = arreyWidths[i+1];
+                    tr.appendChild(th)
+                };
             };
+            calculationResults.appendChild(tr);
         };
-        calculationResults.appendChild(tr);
-    };
-    calculationResults.id = "tableResults";                
-    elementIntoWhichToInsert.appendChild(calculationResults);
-    resultsDate.classList.remove('resultsDate');
+        calculationResults.id = "tableResults";                
+        elementIntoWhichToInsert.appendChild(calculationResults);
+        resultsDate.classList.remove('resultsDate');
+    } catch (error) {viewingFunctionErrors(calculationOfTheRadiusOfTheShockWaveZone.name, errorMessage)};
 }
 
 let arrayOfTableColumnWidths = ["5%", "65%", "10%", "10%", "10%"]; //массив значений ширин столбцов таблиц
 
 calc.onclick = function () {
     results.innerHTML = "" //чистим таблицу с расчетом;
-    //tableResults.style.display = 'table';
-    //tableResults.innerHTML = "" //чистим таблицу с расчетом;
     let calculationDate = {
         initialCalculationData: {
             apparatusVolume: +apparatusVolume.value,

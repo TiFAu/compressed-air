@@ -1,4 +1,4 @@
-//"use strict";
+"use strict";
 
 /**Функция вывода ошибок вычисления в методах
  * @param {string} functionName
@@ -172,11 +172,10 @@ function calculationOfTheRadiusOfTheShockWaveZone (pressureDrop, energyPotential
 /**Функция подбора радиуса зоны поражения с фронтом заданного давления, энергетическом потенциале и заданном атмосферном давлении
  * @param {Object} resultsObject
  * @param {id} elementIntoWhichToInsert
- * @param {Array} arreyWidths
- * 
+ * @param {number[]} arrayWidths
  */
-function displayingTheResultOfTheCalculationToHtml (resultsObject, elementIntoWhichToInsert, arreyWidths) {
-    let arrayOfErrorMessages = ["resultsObject is incorrect", "elementIntoWhichToInsert is incorrect", "arreyWidths is incorrect", "Something went wrong and the rounding function to hundredth was calculated incorrectly"];
+function displayingTheResultOfTheCalculationToHtml (resultsObject, elementIntoWhichToInsert, arrayWidths) {
+    let arrayOfErrorMessages = ["resultsObject is incorrect", "elementIntoWhichToInsert is incorrect", "arrayWidths is incorrect", "Something went wrong and the rounding function to hundredth was calculated incorrectly"];
     let errorMessage = checkingReceivedArgumentValues (arguments, arrayOfErrorMessages);
     try {
         let keysOfTheResultingObject = Object.keys(resultsObject);
@@ -184,8 +183,8 @@ function displayingTheResultOfTheCalculationToHtml (resultsObject, elementIntoWh
         let tableHeader = document.createElement("caption");
         tableHeader.innerHTML = "2. Calculation results | Результати розрахунку";
         calculationResults.appendChild(tableHeader);
-        for (y=0; y < (keysOfTheResultingObject.length); y++){
-            if (y>0){
+        for (let y = 0; y < (keysOfTheResultingObject.length); y++){
+            if (y > 0){
                 var tr = document.createElement("tr");
                 let td = document.createElement("td");
                 td.innerHTML = `2.${keysOfTheResultingObject[y]}.`;
@@ -193,11 +192,11 @@ function displayingTheResultOfTheCalculationToHtml (resultsObject, elementIntoWh
                     td.parentElement.style.backgroundColor = "blue";
                 }
                 tr.appendChild(td);
-                for (i=0; i < resultsObject[y].length;i++){
+                for (let i = 0; i < resultsObject[y].length;i++){
                     if (resultsObject[y][i] !== undefined) {
                         let td = document.createElement("td");
                         td.innerHTML = resultsObject[y][i];
-                        if (i==0){td.style.textAlign= "left"};
+                        if (i == 0){td.style.textAlign= "left"};
                         tr.appendChild(td)
                         }
                     else {break};
@@ -207,12 +206,12 @@ function displayingTheResultOfTheCalculationToHtml (resultsObject, elementIntoWh
                 var tr = document.createElement("tr");
                 let th = document.createElement("th");
                 th.innerHTML = "№ п./п.";
-                th.style.width = arreyWidths[y];
+                th.style.width = arrayWidths[y] + "%";
                 tr.appendChild(th);
-                for (i=0;i < resultsObject[y].length;i++){
+                for (let i = 0; i < resultsObject[y].length;i++){
                     let th = document.createElement("th");
                     th.innerHTML = resultsObject[y][i];
-                    th.style.width = arreyWidths[i+1];
+                    th.style.width = arrayWidths[i+1] + "%";
                     tr.appendChild(th)
                 };
             };
@@ -221,10 +220,10 @@ function displayingTheResultOfTheCalculationToHtml (resultsObject, elementIntoWh
         calculationResults.id = "tableResults";                
         elementIntoWhichToInsert.appendChild(calculationResults);
         resultsDate.classList.remove('resultsDate');
-    } catch (error) {viewingFunctionErrors(displayingTheResultOfTheCalculationToHtml.name, errorMessage)};
+    } catch (error) { viewingFunctionErrors(displayingTheResultOfTheCalculationToHtml.name, errorMessage)};
 }
 
-let arrayOfTableColumnWidths = ["5%", "65%", "10%", "10%", "10%"]; //массив значений ширин столбцов таблиц
+let arrayOfTableColumnWidths = [5, 65, 10, 10, 10]; //массив значений ширин столбцов таблиц
 
 calc.onclick = function () {
     let arrayOfErrorMessages = ["Something went wrong and the rounding function to hundredth was calculated incorrectly"];
@@ -298,4 +297,4 @@ calc.onclick = function () {
         //console.log (calculationDate, resultParameters);
         //return calculationDate, resultParameters;
     } catch (error) {viewingFunctionErrors(calc.onclick.name, errorMessage)};
-}
+}    

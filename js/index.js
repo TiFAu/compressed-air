@@ -169,7 +169,7 @@ function calculationOfTheRadiusOfTheShockWaveZone (pressureDrop, energyPotential
     } catch (error) {viewingFunctionErrors(calculationOfTheRadiusOfTheShockWaveZone.name, errorMessage)};
 }
 
-/**Функция подбора радиуса зоны поражения с фронтом заданного давления, энергетическом потенциале и заданном атмосферном давлении
+/**Функция вывода результатов расчета в тело документа HTML
  * @param {Object} resultsObject
  * @param {id} elementIntoWhichToInsert
  * @param {number[]} arrayWidths

@@ -164,7 +164,7 @@ function calculationOfTheRadiusOfTheShockWaveZone (pressureDrop, energyPotential
             x1 = calculationOneFunction(zoneRadius, energyPotential, atmospherePressure);
             dropPressure = calculationTwoFunction (x1)* Math.pow (10,2);
         }
-        //console.log ( `Радиус = ${zoneRadius}, х1 = ${x1}; dropPressure = ${dropPressure} заданное давление = ${pressureDrop}` )
+        console.log ( `Радиус = ${zoneRadius}, х1 = ${x1}; dropPressure = ${dropPressure} заданное давление = ${pressureDrop}` )
         return zoneRadius
     } catch (error) {viewingFunctionErrors(calculationOfTheRadiusOfTheShockWaveZone.name, errorMessage)};
 }
@@ -276,7 +276,7 @@ calc.onclick = function () {
             8: ["Надлишковий тиск 17 кПа, помірне руйнування перегородок, дверей, рам,  легкі травми обслуговуючого персоналу","м", "R<sub>4</sub>", calculationDate.givenCalculationResults.calculatedRadiiOfShockWaveZones[3]],
             9: ["Надлишковий тиск 2 кПа, малі пошкодження віконних рам (скла), що може до травмування обслуговуючого персоналу","м", "R<sub>5</sub>", calculationDate.givenCalculationResults.calculatedRadiiOfShockWaveZones[4]],
             10: ["Версія програми розрахунку","","","v.1.01"],
-            11: ["Експорт звіту до Excel", "", "", "<button id = 'resultToExcel' class = 'calc' >Expor to Excel</button>"]
+            11: ["Експорт звіту до Excel", "", "", "<button id = 'resultToExcel' class = 'calc' >Expor to Excel | Експорт до Excel</button>"]
         }
 
         displayingTheResultOfTheCalculationToHtml (resultParameters, results, arrayOfTableColumnWidths)

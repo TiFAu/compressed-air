@@ -270,12 +270,12 @@ calc.onclick = function () {
             2: ["Тратиловий еквівалент","кг","W<sub>T</sub>", calculationDate.givenCalculationResults.tntEquivalentExplosive],
             3: ["Категорія вибухонебезпечності технологічного блоку","-", "-", calculationDate.givenCalculationResults.blockExplosionCategory],
             4: ["Радіус руйнування в залежності від розміру надлишкового тиска по занах","-", "-","-"],
-            5: ["Надлишковий тиск 100 кПа, смертельні наслідки, руйнування металевих і бетонних конструкцій","м", "R<sub>1</sub>", calculationDate.givenCalculationResults.calculatedRadiiOfShockWaveZones[0]],
-            6: ["Надлишковий тиск 70 кПа, руйнування металевих і бетонних конструкцій до 50%, важкі травми обслуговуючого персоналу","м", "R<sub>2</sub>", calculationDate.givenCalculationResults.calculatedRadiiOfShockWaveZones[1]],
-            7: ["Надлишковий тиск 28 кПа, руйнування будівель без обрушення, приводить до травм середньої важкості обслуговуючого персоналу","м", "R<sub>3</sub>", calculationDate.givenCalculationResults.calculatedRadiiOfShockWaveZones[2]],
-            8: ["Надлишковий тиск 17 кПа, помірне руйнування перегородок, дверей, рам,  легкі травми обслуговуючого персоналу","м", "R<sub>4</sub>", calculationDate.givenCalculationResults.calculatedRadiiOfShockWaveZones[3]],
-            9: ["Надлишковий тиск 2 кПа, малі пошкодження віконних рам (скла), що може до травмування обслуговуючого персоналу","м", "R<sub>5</sub>", calculationDate.givenCalculationResults.calculatedRadiiOfShockWaveZones[4]],
-            10: ["Версія програми розрахунку","","","v.1.01"],
+            5: ["Радіус зони повного руйнування будинків і смертельної небезпеки для людей, на межі якої надлишковий тиск на фронті ударної хвилі  ∆Р ≥ 100 кПа","м", "R<sub>1</sub>", calculationDate.givenCalculationResults.calculatedRadiiOfShockWaveZones[0]],
+            6: ["Радіус зони сильних руйнувань будівельних конструкцій, обвалення цегляних стін і смертельної небезпеки для людей ∆Р = 70 кПа","м", "R<sub>2</sub>", calculationDate.givenCalculationResults.calculatedRadiiOfShockWaveZones[1]],
+            7: ["Радіус зони слабких руйнувань будівельних конструкцій, для відновлення яких потрібне їх часткове розбирання, та смертельної небезпеки для людей на відкритій місцевості ∆Р = 28 кПа","м", "R<sub>3</sub>", calculationDate.givenCalculationResults.calculatedRadiiOfShockWaveZones[2]],
+            8: ["Радіус зони слабких руйнувань (руйнування віконних отворів, легкоскладаних конструкцій) та тяжкого травмування людей на відкритій місцевості ∆Р = 14 кПа","м", "R<sub>4</sub>", calculationDate.givenCalculationResults.calculatedRadiiOfShockWaveZones[3]],
+            9: ["Радіус зони часткового руйнування скла, нижній поріг ураження людей на відкритій місцевості ∆Р ≤ 2 кПа,","м", "R<sub>5</sub>", calculationDate.givenCalculationResults.calculatedRadiiOfShockWaveZones[4]],
+            10: ["Версія програми розрахунку","","","v.1.0.2"],
             11: ["Експорт звіту до Excel", "", "", "<button id = 'resultToExcel' class = 'calc' >Expor to Excel | Експорт до Excel</button>"]
         }
 

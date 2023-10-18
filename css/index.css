@@ -102,6 +102,10 @@ td.pr {
     text-align: left;
 }
 
+tr:hover {
+  background-color: blueviolet;
+}
+
 .flex {
     display: flex;
     justify-content: center;

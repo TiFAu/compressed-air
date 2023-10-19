@@ -7,6 +7,7 @@ body {
     padding: 3.2rem 0 0 0;
     margin: 0 0 0 0;
     --main-color: rgb(0, 221, 255, 0.94);
+    --main-color-hover-and-first-tr:rgb(10, 255, 255, 0.98);
     --main-color-select: red
 }
  
@@ -37,7 +38,7 @@ section {
     margin: 4px 0 0 0;
 }
 
-input, button, select, text, option, textarea {
+input, button, textarea {
     width: 97%;
     font-size: 1.1em;
     background-color: var(--main-color);
@@ -46,7 +47,7 @@ input, button, select, text, option, textarea {
     padding: 0.2rem;
 }
 
-input:hover, select:hover, option:hover, textarea:hover {
+input:hover, select:hover, textarea:hover {
   background-color: var(--main-color-select);
 }
 
@@ -63,6 +64,10 @@ table {
     padding: 0;
     margin: 0;
     line-height: 1.5;
+}
+
+table tr:first-of-type {
+  background-color: var(--main-color-hover-and-first-tr);
 }
 
 a {
@@ -110,7 +115,7 @@ td.pr {
 }
 
 tr:hover {
-  background-color: rgb(10, 255, 255, 0.98);;
+  background-color: var(--main-color-hover-and-first-tr);
 }
 
 .flex {
@@ -264,7 +269,7 @@ tr:hover {
 
 
 .contact-links {
-    background-color: rgba(0, 221, 255, 0.94);
+    background-color: var(--main-color);
     width: 100vw;
     display:flex;
     align-items: center;
@@ -296,7 +301,7 @@ tr:hover {
     left: 0;
     width: 100vw;
     height: 2rem;
-    background: rgba(0, 221, 255, 0.984);
+    background: var(--main-color);
     border: 1px solid black;
     font-size: 1.2rem;
     letter-spacing: 0.2rem;
